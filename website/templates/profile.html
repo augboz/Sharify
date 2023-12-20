@@ -1,0 +1,121 @@
+{%extends "base.html" %} {% block title %}Profile{% endblock %}
+{%block content %}
+	<div class="containerprofile">
+
+		<div class="profilep">
+
+			<div class="profilep-image">
+
+				<img src="data:image/jpeg;base64, {{ profile_pic }}" alt="Profile Picture" >
+
+			</div>
+
+			<div class="profilep-user-settings">
+
+				<h1 class="profilep-user-name">{{ main_username }}</h1>
+
+				      <a class="btnp profilep-settings-btnp" aria-label="profilep settings" id="edit-profile" href={{ url_for("views.edit_profile") }}>
+			<i class="fas fa-cog" aria-hidden="true"></i>
+
+      </a>
+
+
+			</div>
+
+			<div class="profilep-stats">
+
+				<ul>
+					<li><span class="profilep-stat-count">{{ num_of_posts }}</span> posts</li>
+					<li><span class="profilep-stat-count">188</span> followers</li>
+					<li><span class="profilep-stat-count">206</span> following</li>
+				</ul>
+
+			</div>
+
+			<div class="profilep-bio">
+
+				<p><span class="profilep-real-name">{{ main_username }}</span> {{ profile_bio }}</p>
+
+			</div>
+
+		</div>
+		<!-- End of profile section -->
+
+	</div>
+	<!-- End of container -->
+  <div class="feed">
+      <div class="photo">
+        {% for post in my_posts %}
+        <div class="head">
+          <div class="user">
+          <div class="song-name">
+            <h4>{{ post.song_name }}</h4>
+          </div>
+              <span class="edit">
+            <i class="uil uil-ellipsis-h"></i>
+          </span>
+          <div class="song-artist">
+            <h6>{{ post.song_artist }}</h6>
+          </div>
+
+            <p><img  src="{{ post.album_cover }}" alt="Example Image" class="postphoto"></p>
+
+
+          <div class="action-buttons">
+            <div class="interaction-buttons">
+              <span><i class="uil uil-heart"></i></span>
+              <span><i class="uil uil-comment-dots"></i></span>
+              <span><i class="uil uil-share-alt"></i></span>
+            </div>
+            <div class="bookmark">
+              <span><i class="uil uil-bookmark-full"></i></span>
+            </div>
+          </div>
+
+          <div class="liked-by">
+            <p>Liked by <b>2,323 </b></p>
+          </div>
+
+          <div class="caption">
+            <p><b>{{ post.username }}</b> {{ post.caption }}</p>
+          </div>
+          <div class="comments text-muted">View all 277 comments</div>
+        </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        {% endfor %}
+  </div>
+      </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+<script>
+  function toggleTextFollowers() {
+    var text = document.getElementById("text1");
+    if (text.style.display === "none") {
+      text.style.display = "block";
+    } else {
+      text.style.display = "none";
+    }
+  }
+
+  function toggleTextFollowing() {
+    var text = document.getElementById("text");
+    if (text.style.display === "none") {
+      text.style.display = "block";
+    } else {
+      text.style.display = "none";
+    }
+  }
+</script>
+{%endblock%}

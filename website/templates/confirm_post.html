@@ -1,0 +1,21 @@
+{%extends "base.html" %} {% block title %}confirm_profile {% endblock %}
+{%block content %}
+
+
+<div class="container">
+    <h2>{{song_name}}</h2>
+    <h3>{{song_artist}}</h3>
+    <h4>Caption:</h4>
+        <form action="/confirm-post" method="post">
+            <input type="text" name="text_input">
+            <input type="submit" value="Submit Text">
+        </form>
+    <div class="confirm-pic">
+    <img src="{{album_cover}}" alt="Example Image">
+        </div>
+
+
+
+</div>
+
+{%endblock%}

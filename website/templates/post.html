@@ -1,0 +1,68 @@
+{%extends "base.html" %} {% block title %}Post{% endblock %}
+{%block content %}
+
+<h1 align="center">Posts</h1>
+<ul class="list-group list-group-flush" id="posts">
+    {%for post in user.posts%}
+    <li class ="list-group-item">{{post. data}}
+        <button type="button" class="close" onClick="deletePost({{post.id}})">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </li>
+    {%endfor%}
+</ul>
+<form method="post" action="{{ url_for('views.post') }}">
+  <textarea name="song_name" id="song_name" class="form-control"></textarea>
+    <br>
+    <div align="center">
+        <input type="submit" name="submit_button" value="Search">
+    </div>
+
+<h1>{{song_found}}</h1>
+
+<div  class="container">
+  <div  class="row">
+    <div class="col-sm">
+        <iframe src="https://open.spotify.com/embed/track/{{track1_id}}" width="300" height="280" frameborder="0" allowtransparency="true" allow="encrypted-media" alt=""></iframe>
+            <div align="center">
+                        <a class="" id="edit-profile" href={{url_for("views.confirm_post")}} >
+                                    <input type="submit" name="submit_button" value="Post 1">
+                        </a>
+            </div>
+    </div>
+    <div class="col-sm">
+        <iframe src="https://open.spotify.com/embed/track/{{track2_id}}" width="300" height="280" frameborder="0" allowtransparency="true" allow="encrypted-media" alt=""></iframe>
+            <div align="center">
+                            <a class=""  href={{url_for("views.confirm_post")}} >
+                                    <input type="submit" name="submit_button" value="Post 2">
+                        </a>
+            </div>
+    </div>
+      <div class="col-sm">
+          <iframe src="https://open.spotify.com/embed/track/{{track3_id}}" width="300" height="280" frameborder="0" allowtransparency="true" allow="encrypted-media" alt=""></iframe>
+                <div align="center">
+ <a class=""  href={{url_for("views.confirm_post")}} >
+                                    <input type="submit" name="submit_button" value="Post 3">
+                        </a>
+                </div>
+    </div>
+      <div class="col-sm">
+            <iframe src="https://open.spotify.com/embed/track/{{track4_id}}" width="300" height="280" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <div align="center">
+ <a class=""  href={{url_for("views.confirm_post")}} >
+                                    <input type="submit" name="submit_button" value="Post 4">
+                        </a>
+                </div>
+      </div>
+  </div>
+</div>
+</form>
+
+<h1> Trending Songs:</h1>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZEVXbJiyhoAPEfMK?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+
+<script>
+</script>
+
+{%endblock%}

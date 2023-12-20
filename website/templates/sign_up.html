@@ -1,0 +1,77 @@
+{%extends "base.html" %} {% block title %}SignUp{% endblock %}
+{%block content %}
+ <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+
+
+<form method ="POST" class="forms">
+
+        <h3>Login Here</h3>
+
+            <div class="form-group">
+        <label for="email" class="labels">email</label>
+        <input type ="email"
+               class="form-controlls"
+               id="email"
+               name="email"
+               placeholder="email"
+        />
+    </div>
+        <div class="form-group">
+        <label for="username" class="labels">Username</label>
+        <input type ="text"
+               class="form-controlls"
+               id="username"
+               name="username"
+               placeholder="username"
+        />
+    </div>
+<div class="form-group">
+        <label for="password1" class="labels">password</label>
+        <input type ="password"
+               class="form-controlls"
+               id="password1"
+               name="password1"
+               placeholder="password"
+        />
+    </div>
+     <div class="form-group">
+        <label for="password2" class="labels">password</label>
+        <input type ="password"
+               class="form-controlls"
+               id="password2"
+               name="password2"
+               placeholder="confirm password"
+        />
+    </div>
+
+        <button type="submit" class="buttons">Sign up</button>
+        <div class="social">
+          <div class="go"><i class="fab fa-google"></i>  Google</div>
+          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+        </div>
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

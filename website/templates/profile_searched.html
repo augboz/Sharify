@@ -1,0 +1,226 @@
+{%extends "base.html" %} {% block title %}searched_profile {% endblock %}
+{%block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="profile-photo">
+            <img src="data:image/jpeg;base64, {{ profile_pic }}" />
+      </div>
+      <h1>{{searched_account}}</h1>
+        <h2>{{profile_bio}}</h2>
+
+    </div>
+      <div class="col-sm">
+          <h2>{{num_of_posts}} Posts</h2>
+      </div>
+      <div class="col-sm">
+
+          <h2>{{users_personal.followers}} Followers</h2>
+
+      </div>
+            <div class="col-sm">
+
+                <h2>{{users_personal.following}} Following</h2>
+            </div>
+  </div>
+      <div class="row">
+        <div class="col-sm">
+            <form method="post" action="{{ url_for('views.profile_searched') }}">
+
+             <div align="center">
+                 {% if you_follow == 1 %}
+
+                        <input type="submit" name="submit_button" value="unfollow">
+                 {% else %}
+
+                  <input type="submit" name="submit_button" value="follow">
+
+                     {% endif %}
+
+            </div>
+            </form>
+
+        </div>
+  </div>
+
+
+{% if you_follow == 1 %}
+
+<div class="feed">
+                        {% for post in users_posts %}
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo">
+            <img src="data:image/jpeg;base64, {{ profile_pic }}" />
+                                </div>
+                                <div class="ingo">
+                                    <h3>{{post.username}}</h3>
+                                    <small>15 MINUTES AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                            <div class="song-name">
+                                <p>{{post.song_name}}</p>
+                        </div>
+                            <div class="song-artist">
+                                <p> by {{post.song_artist}}</p>
+                        </div>
+
+                        <div class="photo">
+                <p><img src="{{post.album_cover}}" alt="Example Image"></p>
+                        </div>
+                            <div class="action-buttons">
+
+                                  <div class="interaction-buttons">
+                            {% if post.liked_by_user %}
+                                <i class="fas fa-heart liked-heart" data-postid="{{ post.id }}"></i>
+                            {% else %}
+                                <i class="far fa-heart" data-postid="{{ post.id }}"></i>
+                            {% endif %}
+                            <span>{{ post.likes }}</span>
+
+                                      <div class="comment-section">
+            <!-- Comment icon -->
+            <span class="comment-icon" data-postid="{{ post.id }}">Comment</span>
+            <!-- Comment text box -->
+            <div class="comment-box" style="display: none;">
+                <input type="text" class="comment-input" placeholder="Type your comment here">
+                <button class="submit-comment" data-postid="{{ post.id }}">Submit Comment</button>
+            </div>
+            <!-- Display comments section -->
+            <div class="comments-list" style="display: none;">
+                <!-- Comments will be displayed here -->
+            </div>
+        </div>
+                                  <script>
+    // Submit comment button logic
+    document.querySelectorAll('.submit-comment').forEach(submitCommentButton => {
+        submitCommentButton.addEventListener('click', () => {
+            const postId = submitCommentButton.dataset.postid;
+            const commentInput = submitCommentButton.previousElementSibling;
+            const comment = commentInput.value.trim();
+            if (comment !== '') {
+                fetch('/submit_comment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ post_id: postId, comment_text: comment }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response from the server if needed
+                    console.log(data.message);
+
+                    // Clear the comment input after successful submission
+                    commentInput.value = '';
+
+                    // Fetch updated comments and display them
+                    fetchComments(postId);
+                })
+                .catch(error => {
+                    // Handle any errors that may occur during the request
+                    console.error('Error submitting comment:', error);
+                });
+            }
+        });
+    });
+
+    // View comments button logic
+    document.querySelectorAll('.comment-icon').forEach(commentIcon => {
+        commentIcon.addEventListener('click', () => {
+            const postId = commentIcon.dataset.postid;
+            const commentsList = commentIcon.nextElementSibling.nextElementSibling;
+
+            if (commentsList.style.display === 'none') {
+                // Fetch comments for the specific post from the backend using AJAX
+                fetchComments(postId);
+                commentsList.style.display = 'block';
+            } else {
+                commentsList.style.display = 'none';
+            }
+        });
+    });
+
+    // Function to fetch comments for a specific post
+    function fetchComments(postId) {
+        const commentsList = document.querySelector(`[data-postid="${postId}"] .comments-list`);
+
+        fetch(`/get_comments/${postId}`)
+            .then(response => response.json())
+            .then(data => {
+                // Render the comments in the commentsList div
+                const commentsHtml = data.comments.map(comment => `
+                    <div class="comment">
+                        <img src="data:image/jpeg;base64, {{ post.profile_pic }}" />
+                        <p><b>{{ comment.username }}</b>: ${comment.comment_text}</p>
+                    </div>
+                `).join('');
+                commentsList.innerHTML = commentsHtml;
+            })
+            .catch(error => {
+                // Handle any errors that may occur during the request
+                console.error('Error fetching comments:', error);
+            });
+    }
+</script>
+
+                        </div>
+                                 </div>
+    <div class="liked-by">
+    {% if post.likes == 1 %}
+        <p>Liked by <b>{{ post.latest_liker }}</b></p>
+    {% elif post.likes > 1 %}
+        <p>Liked by <b>{{ post.latest_liker }}</b> and <b> <span>{{ post.likes }}</span>
+ others</b></p>
+    {% else %}
+        <p>No likes yet</p>
+    {% endif %}
+</div>
+                        <div class="caption">
+                            <p><b>{{post.username}}</b> {{post.caption}}</p>
+                        </div>
+                        <div class="comments text-muted">View all 277 comments</div>
+                    </div>
+                    {% endfor %}
+    </div>
+<style>
+    .liked-heart {
+        color: red;
+    }
+</style>
+<script>
+    document.querySelectorAll('.interaction-buttons i').forEach(heartIcon => {
+        heartIcon.addEventListener('click', () => {
+            const postId = heartIcon.dataset.postid;
+            fetch(`/like/${postId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    const likeCountElement = heartIcon.nextElementSibling;
+                    likeCountElement.textContent = data.likes;
+
+                    if (data.liked_by_user) {
+                        heartIcon.classList.add('fas');
+                        heartIcon.classList.remove('far');
+                        heartIcon.classList.add('liked-heart');
+                    } else {
+                        heartIcon.classList.add('far');
+                        heartIcon.classList.remove('fas');
+                        heartIcon.classList.remove('liked-heart');
+                    }
+                });
+        });
+    });
+</script>
+
+{% else %}
+    <h2>You do not follow this user</h2>
+
+    {% endif %}
+</div>
+
+
+{%endblock%}

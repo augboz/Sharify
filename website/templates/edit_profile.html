@@ -1,0 +1,38 @@
+{%extends "base.html" %} {% block title %}edit_profile {% endblock %}
+{%block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="profile-photo">
+                <img src="data:image/jpeg;base64, {{ profile_pic }}" />
+            </div>
+
+            <h1>{{main_username}}</h1>
+            <h2> {{profile_bio}}</h2>
+
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md">
+        <h2>Edit bio:</h2>
+        <form action="/edit-profile" method="post">
+            <input type="text" name="text_input">
+            <input type="submit" value="Submit Text">
+        </form>
+    </div>
+    <div class="col-md">
+        <h2>Edit profile pic:</h2>
+        <form action="/edit-profile" method="post" enctype="multipart/form-data">
+            <input type="file" name="image_input">
+            <input type="submit" value="Submit Image">
+        </form>
+
+    </div>
+</div>
+</div>
+
+{%endblock%}
