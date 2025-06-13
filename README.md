@@ -9,5 +9,12 @@ Sharify is a social network designed to help users discover, share, and connect 
 - **SQL-Backed**: All user data and connections are stored in a SQL database for fast and reliable access.
 - **Music Discovery**: See your friends posts and songs that they are listening to at the moment.
 
+## 🛠️ Technologies
+
+- **Frontend**:Using plain HTML/CSS/JS
+- **Backend**: Python 
+- **API**: Spotify Web API
+- **Database**: SQLite
+
 🎯 Goals
 Sharify was built to explore how technology can create meaningful connections through music. Whether it’s bonding over shared tastes or discovering artists through friends, Sharify makes it easier to connect sonically and socially.
