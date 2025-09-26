@@ -4,7 +4,7 @@ Sharify is an UNFINISHED social network designed to help users discover, share, 
 
 ## 🚀 Features
 
-- **Spotify Integration**: Connect your Spotify account to sync top songs, artists, and playlists.
+- **Spotify Integration**
 - **User Profiles**: See what your friends are listening to, and follow other users to discover new sounds.
 - **SQL-Backed**: All user data and connections are stored in a SQL database for fast and reliable access.
 - **Music Discovery**: See your friends posts and songs that they are listening to at the moment.
