@@ -17,4 +17,5 @@ Sharify is an UNFINISHED social network designed to help users discover, share, 
 - **Database**: SQLite
 
 🎯 Goals
-Sharify was built to explore how technology can create meaningful connections through music. Whether it’s bonding over shared tastes or discovering artists through friends, Sharify makes it easier to connect sonically and socially.
+
+Sharify was built to explore how tech can be used to connect through music. Whether it’s bonding over shared tastes or discovering artists through friends, Sharify makes it easier to connect sonically and socially.
