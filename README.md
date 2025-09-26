@@ -1,6 +1,6 @@
 # 🎵 Sharify
 
-Sharify is a social network designed to help users discover, share, and connect through their music tastes. By integrating with the Spotify API, Sharify lets users showcase their top tracks and artists, follow friends, and explore music from people with similar tastes.
+Sharify is an UNFINISHED social network designed to help users discover, share, and connect through their music tastes. By integrating with the Spotify API, Sharify lets users showcase their top tracks and artists, follow friends, and explore music from people with similar tastes.
 
 ## 🚀 Features
 
